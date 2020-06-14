@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+          integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>News-App</title>
+</head>
+<body>
+
+<form class="pure-form" th:action="@{/search}" th:object="${ccpair}" method="get">
+    <fieldset>
+        <legend>News Choice Form</legend>
+        <label for="country">Country</label>
+        <select id="country" th:field="*{countryField}">
+            <option th:each="country:${countries}" th:value="${country}" th:text="${country}" value=""></option>
+        </select>
+
+        <label for="category">Category</label>
+        <select id="category" th:field="*{categoryField}">
+            <option th:each="category:${categories}" th:value="${category}" th:text="${category}" value=""></option>
+        </select>
+
+        <button type="submit" class="pure-button pure-button-primary">Search news</button>
+    </fieldset>
+</form>
+
+
+<table class="pure-table">
+    <thead>
+    <tr class="headings">
+        <th class="column-title">Published at</th>
+        <th class="column-title">Title</th>
+        <th class="column-title"></th>
+        <th class="column-title">Description</th>
+        <th class="column-title">Link</th>
+        <th class="column-title">Author</th>
+        <th class="column-title">Source Name</th>
+        <th class="column-title"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="article: ${articles}">
+        <td th:text="${article.publishedAt}"></td>
+        <td th:text="${article.title}"></td>
+        <td><img th:width="128px" th:src="${article.urlToImage}"></td>
+        <td th:text="${article.description}"></td>
+        <td><a th:href="${article.url}">Go to article!</a></td>
+        <td th:text="${article.author}"></td>
+        <td th:text="${article.getSource().getName()}"></td>
+        <td>
+            <a class="pure-button" th:href="@{update-news/{id}(id=${article.id})}"
+               th:action="@{/update-news/{id}(id=${article.id})}" th:text="Edit"></a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>
+

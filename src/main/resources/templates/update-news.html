@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+          integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>News-App</title>
+</head>
+<body>
+<br>
+<form th:action="@{/search-result}">
+    <input type="submit" class="pure-button pure-input-1-2 pure-button-primary" value="Go back"/>
+</form>
+<br>
+
+<form class="pure-form pure-form-stacked" th:action="@{/save-update/{id}(id=${edit_article.id})}"
+      th:object="${new_article}" method="post">
+    <fieldset>
+        <legend>Edit article</legend>
+        <br>
+        <label for="published_at">Published at</label>
+        <textarea class="pure-input-1-2" id="published_at" th:field="*{publishedAt}" th:placeholder="${edit_article.publishedAt}"></textarea>
+        <br>
+        <br>
+        <label for="title">Title</label>
+        <textarea class="pure-input-1-2" id="title" th:field="*{title}" th:placeholder="${edit_article.title}"></textarea>
+        <br>
+        <br>
+        <label for="description">Description</label>
+        <textarea class="pure-input-1-2" id="description" th:field="*{description}" th:placeholder="${edit_article.description}"></textarea>
+        <br>
+        <br>
+        <label for="content">Content</label>
+        <textarea class="pure-input-1-2" id="content" th:field="*{content}" th:placeholder="${edit_article.content}"></textarea>
+        <br>
+        <br>
+        <label for="author">Author</label>
+        <textarea class="pure-input-1-2" id="author" th:field="*{author}" th:placeholder="${edit_article.author}"></textarea>
+        <br>
+        <br>
+        <label for="source">Source</label>
+        <textarea type="text" class="pure-input-1-2" id="source" th:field="*{source.name}" th:placeholder="${edit_article.source.name}"></textarea>
+        <br>
+        <br>
+        <button type="submit" class="pure-button pure-button-primary">Save</button>
+    </fieldset>
+</form>
+
+</body>
+</html>
